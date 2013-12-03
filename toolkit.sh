@@ -10,6 +10,9 @@
 
 set -e
 
+echo
+echo
+
 if ! which git > /dev/null; then
   echo
   echo "I'm unable to find Git, a source code management package. Let's"
@@ -23,6 +26,8 @@ if ! which git > /dev/null; then
   echo
 fi
 
+sleep 2
+
 if ( ! which python > /dev/null ); then
   echo "I'm unable to find Python- let's install that now:"
   echo
@@ -35,6 +40,8 @@ if ( ! which python > /dev/null ); then
 else
   echo "It appears you already have Python."
 fi
+
+sleep 2
 
 if ( ! which virtualenv > /dev/null ); then
   echo
@@ -51,14 +58,18 @@ else
   echo "It appears you already have Virtualenv."
 fi
 
+sleep 2
+
 echo
 echo "Now we will set up "`pwd`" as the working directory for this class."
 echo "When working on code, be sure to return to this directory before"
 echo "making changes."
 echo
 
+sleep 2
+
 if [ ! -f .lsda-ssh-key ]; then
-  curl https://lsda.cs.uchicago.edu/generate-ssh-key.sh > .lsda_ssh_key
+  curl https://lsda.cs.uchicago.edu/generate-ssh-key.sh > .lsda_ssh_key 2>/dev/null
 fi
 
 git clone git@lsda.uchicago.edu:assignment-one
