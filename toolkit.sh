@@ -12,6 +12,12 @@ set -e
 
 echo
 echo
+echo "Hello there! Let's walk through a basic installation of three useful"
+echo "software packages: Git, Python, and Virtualenv; and then set up your"
+echo "computer to submit jobs to the Amazon Elastic Compute Cloud."
+echo
+
+sleep 2
 
 if ! which git > /dev/null; then
   echo
@@ -24,6 +30,8 @@ if ! which git > /dev/null; then
   echo
   echo "It appears that went well. Let's continue."
   echo
+else
+  echo "It appears that you already have Git!"
 fi
 
 sleep 2
@@ -78,5 +86,10 @@ source bin/activate
 pip install -r requirements.txt
 
 echo
-echo "Excellent. It appears everything is in order."
+echo "Excellent. It appears everything is in order. If you are having"
+echo "problems, please find Jeremy and bother him until he makes everything"
+echo "better. Best of luck,"
+echo
+echo "     -J"
+echo
 echo
