@@ -10,7 +10,7 @@
 
 set -e
 
-if ! which git > /dev/null; do
+if ! which git > /dev/null; then
   echo
   echo "I'm unable to find Git, a source code management package. Let's"
   echo "install it now:"
@@ -23,7 +23,7 @@ if ! which git > /dev/null; do
   echo
 fi
 
-if ( ! which python > /dev/null ); do
+if ( ! which python > /dev/null ); then
   echo "I'm unable to find Python- let's install that now:"
   echo
   
@@ -36,7 +36,7 @@ else
   echo "It appears you already have Python."
 fi
 
-if ( ! which virtualenv > /dev/null ); do
+if ( ! which virtualenv > /dev/null ); then
   echo
   echo "We also will need to install Virtualenv, a Python installation"
   echo "manager."
