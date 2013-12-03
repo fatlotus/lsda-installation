@@ -57,7 +57,7 @@ echo "When working on code, be sure to return to this directory before"
 echo "making changes."
 echo
 
-if ( ! -f .lsda-ssh-key ); then
+if [ ! -f .lsda-ssh-key ]; then
   curl https://lsda.cs.uchicago.edu/generate-ssh-key.sh > .lsda_ssh_key
 fi
 
