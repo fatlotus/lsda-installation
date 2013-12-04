@@ -78,7 +78,9 @@ sleep 2
 
 if [ ! -f .lsda-ssh-key ]; then
   read -p "CNetID: " $CNETID
-  curl -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > .lsda_ssh_key
+  curl -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > lsda_ssh_key.pem
+  ssh-add lsda_ssh_key.pem
+  rm lsda_ssh_key.pem
 fi
 
 git clone git@lsda.uchicago.edu:assignment-one
