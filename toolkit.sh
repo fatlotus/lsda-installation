@@ -77,7 +77,7 @@ echo
 sleep 2
 
 if [ ! -f .lsda-ssh-key ]; then
-  curl https://lsda.cs.uchicago.edu/generate-ssh-key.sh > .lsda_ssh_key 2>/dev/null
+  curl https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > .lsda_ssh_key 2>/dev/null
 fi
 
 git clone git@lsda.uchicago.edu:assignment-one
