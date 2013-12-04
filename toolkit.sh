@@ -87,7 +87,7 @@ if [ ! -f .lsda-ssh-key ]; then
   rm lsda_ssh_key.pem
 fi
 
-git clone git@lsda.uchicago.edu:assignment-one
+git clone git@lsda.cs.uchicago.edu:assignment-one
 virtualenv .
 source bin/activate
 pip install -r requirements.txt
