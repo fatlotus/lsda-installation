@@ -89,7 +89,7 @@ if [ ! -f lsda_ssh_key.pem ]; then
   rm lsda_ssh_key.pem
 fi
 
-if [ ! -f .git ]; then
+if [ ! -d .git ]; then
   echo
   echo "Next, let's download the starter projects for this assignment. If prompted to"
   echo "\"Are you sure you want to...\", just type yes."
