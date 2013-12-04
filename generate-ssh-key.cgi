@@ -2,12 +2,15 @@
 #
 # This script adds the specified user to the Gitolite repository.
 
+echo "Content-type: text/plain"
+echo
+
 set -e -x
 
 TEMP_DIR=$(mktemp -d)
 cd $TEMP_DIR
 
-git clone $REPOSITORY_URL .
+git clone git@localhost:gitolite-admin .
 ssh-keygen -b 4096 -t rsa -f keydir/$REMOTE_USER -P ""
 
 echo "@students = `ls keydir`"
