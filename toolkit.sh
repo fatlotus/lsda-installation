@@ -74,7 +74,8 @@ echo
 echo "  `pwd`"
 echo
 echo "as the working directory for this class. When working on code, be sure to return"
-echo "to this directory before making changes."
+echo "to this directory before making changes. Next we're going to set up your computer"
+echo "to use your CNetID account for submitting assignments."
 echo
 
 sleep 2
@@ -87,11 +88,20 @@ if [ ! -f .lsda-ssh-key ]; then
   rm lsda_ssh_key.pem
 fi
 
-git clone git@lsda.cs.uchicago.edu:assignment-one
+echo
+echo "Next, let's download the starter projects for this assignment. If prompted to"
+echo "\"Are you sure you want to...\", just type yes."
+echo
+
+git clone git@lsda.cs.uchicago.edu:assignment-one .
+
+echo
 virtualenv .
 source bin/activate
+echo
 pip install -r requirements.txt
 
+echo
 echo
 echo "Excellent. It appears everything is in order. If you are having"
 echo "problems, please find Jeremy and bother him until he makes everything"
