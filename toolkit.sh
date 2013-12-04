@@ -82,7 +82,7 @@ sleep 2
 if [ ! -f .lsda-ssh-key ]; then
   echo -n "Please enter your CNetID: "
   CNETID="$(head -n 1 /dev/tty)"
-  curl -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > lsda_ssh_key.pem
+  curl --insecure -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > lsda_ssh_key.pem
   ssh-add lsda_ssh_key.pem
   rm lsda_ssh_key.pem
 fi
