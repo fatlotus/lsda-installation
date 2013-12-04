@@ -69,15 +69,18 @@ fi
 sleep 2
 
 echo
-echo "Now we will set up "`pwd`" as the working directory for this class."
-echo "When working on code, be sure to return to this directory before"
-echo "making changes."
+echo "Now we will set up"
+echo
+echo "  `pwd`"
+echo
+echo "as the working directory for this class. When working on code, be sure to return"
+echo "to this directory before making changes."
 echo
 
 sleep 2
 
 if [ ! -f .lsda-ssh-key ]; then
-  read -p "CNetID: " $CNETID
+  read -p "CNetID: " CNETID
   curl -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > lsda_ssh_key.pem
   ssh-add lsda_ssh_key.pem
   rm lsda_ssh_key.pem
