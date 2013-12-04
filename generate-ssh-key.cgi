@@ -11,7 +11,7 @@ TEMP_DIR=$(mktemp -d)
 cd $TEMP_DIR
 
 # Pre-verify host checking (this is a hack!)
-ssh -o StrictHostKeyChecking=no git@localhost echo 1>&2
+ssh -o StrictHostKeyChecking=no git@localhost echo 1>&2 || true
 
 # Clone existing repository values
 git clone git@localhost:gitolite-admin $TEMP_DIR 1>&2
