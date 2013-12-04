@@ -10,7 +10,16 @@
 
 set -e
 
-if ! which git > /dev/null; do
+echo
+echo
+echo "Hello there! Let's walk through a basic installation of three useful"
+echo "software packages: Git, Python, and Virtualenv; and then set up your"
+echo "computer to submit jobs to the Amazon Elastic Compute Cloud."
+echo
+
+sleep 2
+
+if ! which git > /dev/null; then
   echo
   echo "I'm unable to find Git, a source code management package. Let's"
   echo "install it now:"
@@ -21,9 +30,13 @@ if ! which git > /dev/null; do
   echo
   echo "It appears that went well. Let's continue."
   echo
+else
+  echo "It appears that you already have Git!"
 fi
 
-if ( ! which python > /dev/null ); do
+sleep 2
+
+if ( ! which python > /dev/null ); then
   echo "I'm unable to find Python- let's install that now:"
   echo
   
@@ -36,7 +49,9 @@ else
   echo "It appears you already have Python."
 fi
 
-if ( ! which virtualenv > /dev/null ); do
+sleep 2
+
+if ( ! which virtualenv > /dev/null ); then
   echo
   echo "We also will need to install Virtualenv, a Python installation"
   echo "manager."
@@ -51,14 +66,18 @@ else
   echo "It appears you already have Virtualenv."
 fi
 
+sleep 2
+
 echo
 echo "Now we will set up "`pwd`" as the working directory for this class."
 echo "When working on code, be sure to return to this directory before"
 echo "making changes."
 echo
 
-if ( ! -f .lsda-ssh-key ); then
-  curl https://lsda.cs.uchicago.edu/generate-ssh-key.sh > .lsda_ssh_key
+sleep 2
+
+if [ ! -f .lsda-ssh-key ]; then
+  curl https://lsda.cs.uchicago.edu/generate-ssh-key.sh > .lsda_ssh_key 2>/dev/null
 fi
 
 git clone git@lsda.uchicago.edu:assignment-one
@@ -67,5 +86,10 @@ source bin/activate
 pip install -r requirements.txt
 
 echo
-echo "Excellent. It appears everything is in order."
+echo "Excellent. It appears everything is in order. If you are having"
+echo "problems, please find Jeremy and bother him until he makes everything"
+echo "better. Best of luck,"
+echo
+echo "     -J"
+echo
 echo
