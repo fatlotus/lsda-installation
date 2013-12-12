@@ -85,8 +85,8 @@ CNETID="$(head -n 1 /dev/tty)"
 
 if [ ! -f lsda_ssh_key.pem ]; then
   curl --insecure -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > lsda_ssh_key.pem
-  ssh-add lsda_ssh_key.pem
-  rm lsda_ssh_key.pem
+  chmod 0400 .lsda_ssh_key.pem
+  ssh-add .lsda_ssh_key.pem
 fi
 
 if [ ! -d .git ]; then
@@ -95,13 +95,21 @@ if [ ! -d .git ]; then
   echo "\"Are you sure you want to...\", just type yes."
   echo
 
-  git clone git@lsda.cs.uchicago.edu:assignment-one .
+  git clone git@lsda.cs.uchicago.edu:assignment-one .clone-dest.tmp >> install.log
+  mv .clone-dest.tmp/.git .git
+  git reset --hard HEAD
 fi
 
 echo
 echo "Hang tight -- this may take a few minutes."
 echo
 virtualenv . >> install.log
+cat >> bin/activate <<EOF
+
+\# This last bit was added by the LSDA installer script, just for you!
+ssh-add .lsda_ssh_key.pem
+EOF
+
 source bin/activate
 pip install -r requirements.txt >> install.log
 git checkout -b "submissions/$CNETID/submit" >> install.log
