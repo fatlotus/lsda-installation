@@ -83,7 +83,8 @@ if [ ! -d .git ]; then
   echo "\"Are you sure you want to...\", just type yes."
   echo
 
-  git clone git@lsda.cs.uchicago.edu:assignment-one .clone-dest.tmp >> install.log
+  git clone git@lsda.cs.uchicago.edu:assignment-one .clone-dest.tmp \
+    2>>install.log >> install.log
   mv .clone-dest.tmp/.git .git
   git reset --hard HEAD
 fi
@@ -100,7 +101,7 @@ rm -r bootstrap
 cat >> bin/activate <<EOF
 
 # This last bit was added by the LSDA installer script, just for you!
-ssh-add .lsda_ssh_key.pem
+ssh-add .lsda_ssh_key.pem >install.log 2>install.log
 EOF
 
 source bin/activate
