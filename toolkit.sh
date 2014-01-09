@@ -52,9 +52,8 @@ fi
 sleep 2
 
 echo
-echo "Next let's install Virtualenv. This is a software package that makes"
+echo "Next, let's install Virtualenv. This is a software package that makes"
 echo "Installation of future software packages easier."
-echo
 
 rm -rf virtualenv
 git clone --depth 1 https://github.com/pypa/virtualenv 2>>install.log \
@@ -114,12 +113,9 @@ source bin/activate
 pip install -r requirements.txt >> install.log
 git checkout -B "submissions/$CNETID/submit" 2>> install.log
 
-echo
-echo
 echo "Excellent. It appears everything is in order. If you are having"
 echo "problems, please find Jeremy and bother him until he makes everything"
 echo "better. Best of luck,"
 echo
-echo "     -J"
-echo
+echo "-J"
 echo
