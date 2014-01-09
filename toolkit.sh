@@ -51,7 +51,8 @@ fi
 
 sleep 2
 
-git clone --depth 1 https://github.com/pypa/virtualenv >> install.log
+git clone --depth 1 https://github.com/pypa/virtualenv 2>>install.log \
+  >> install.log
 
 sleep 2
 
@@ -98,7 +99,7 @@ rm -r bootstrap
 
 cat >> bin/activate <<EOF
 
-\# This last bit was added by the LSDA installer script, just for you!
+# This last bit was added by the LSDA installer script, just for you!
 ssh-add .lsda_ssh_key.pem
 EOF
 
