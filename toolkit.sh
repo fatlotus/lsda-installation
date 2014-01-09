@@ -91,7 +91,7 @@ if [ ! -d .git ]; then
   git clone git@lsda.cs.uchicago.edu:assignment-one .clone-dest.tmp \
     2>>install.log >> install.log
   mv .clone-dest.tmp/.git .git
-  git reset --hard HEAD 2 >> install.log >> install.log
+  git reset --hard HEAD 2>>install.log >>install.log
 fi
 
 echo
