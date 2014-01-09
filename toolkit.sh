@@ -92,7 +92,7 @@ if [ ! -d .git ]; then
   git clone git@lsda.cs.uchicago.edu:assignment-one .clone-dest.tmp \
     2>>install.log >> install.log
   mv .clone-dest.tmp/.git .git
-  git reset --hard HEAD
+  git reset --hard HEAD 2 >> install.log >> install.log
 fi
 
 echo
@@ -102,7 +102,7 @@ echo
 python virtualenv/virtualenv.py bootstrap >> install.log
 bootstrap/bin/pip install virtualenv >> install.log
 bootstrap/bin/virtualenv . >> install.log
-rm -r bootstrap
+rm -rf bootstrap virtualenv
 
 cat >> bin/activate <<EOF
 
@@ -112,7 +112,7 @@ EOF
 
 source bin/activate
 pip install -r requirements.txt >> install.log
-git checkout -b "submissions/$CNETID/submit" 2>> install.log
+git checkout -B "submissions/$CNETID/submit" 2>> install.log
 
 echo
 echo
