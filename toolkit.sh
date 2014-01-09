@@ -115,7 +115,5 @@ git checkout -B "submissions/$CNETID/submit" 2>> install.log
 
 echo "Excellent. It appears everything is in order. If you are having"
 echo "problems, please find Jeremy and bother him until he makes everything"
-echo "better. Best of luck,"
-echo
-echo "-J"
+echo "better."
 echo
