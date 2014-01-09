@@ -51,20 +51,7 @@ fi
 
 sleep 2
 
-if ( ! which virtualenv > /dev/null ); then
-  echo
-  echo "We also will need to install Virtualenv, a Python installation"
-  echo "manager."
-  echo
-  
-  sudo pip install -r virtualenv
-  
-  echo
-  echo "We were successsful."
-  echo
-else
-  echo "It appears you already have Virtualenv."
-fi
+git clone https://github.com/pypa/virtualenv
 
 sleep 2
 
@@ -84,7 +71,7 @@ echo -n "Please enter your CNetID: "
 CNETID="$(head -n 1 /dev/tty)"
 
 if [ ! -f .lsda_ssh_key.pem ]; then
-  curl --insecure -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > .lsda_ssh_key.pem
+  curl --insecure -k -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > .lsda_ssh_key.pem
   chmod 0400 .lsda_ssh_key.pem
   ssh-add .lsda_ssh_key.pem
 fi
@@ -103,7 +90,7 @@ fi
 echo
 echo "Hang tight -- this may take a few minutes."
 echo
-virtualenv . >> install.log
+python virtualenv/virtualenv.py . >> install.log
 cat >> bin/activate <<EOF
 
 \# This last bit was added by the LSDA installer script, just for you!
