@@ -69,24 +69,52 @@ fi
 sleep 2
 
 echo
-echo "Now we will set up "`pwd`" as the working directory for this class."
-echo "When working on code, be sure to return to this directory before"
-echo "making changes."
+echo "Now we will set up"
+echo
+echo "  `pwd`"
+echo
+echo "as the working directory for this class. When working on code, be sure to return"
+echo "to this directory before making changes. Next we're going to set up your computer"
+echo "to use your CNetID account for submitting assignments."
 echo
 
 sleep 2
 
-if [ ! -f .lsda-ssh-key.pem ]; then
-  read -p "CNetID: " $CNETID
-  curl -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > .lsda_ssh_key.pem
+echo -n "Please enter your CNetID: "
+CNETID="$(head -n 1 /dev/tty)"
+
+if [ ! -f .lsda_ssh_key.pem ]; then
+  curl --insecure -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > .lsda_ssh_key.pem
+  chmod 0400 .lsda_ssh_key.pem
+  ssh-add .lsda_ssh_key.pem
 fi
 
-ssh-add .lsda_ssh_key.pem
-git clone git@lsda.uchicago.edu:assignment-one
-virtualenv .
-source bin/activate
-pip install -r requirements.txt
+if [ ! -d .git ]; then
+  echo
+  echo "Next, let's download the starter projects for this assignment. If prompted to"
+  echo "\"Are you sure you want to...\", just type yes."
+  echo
 
+  git clone git@lsda.cs.uchicago.edu:assignment-one .clone-dest.tmp >> install.log
+  mv .clone-dest.tmp/.git .git
+  git reset --hard HEAD
+fi
+
+echo
+echo "Hang tight -- this may take a few minutes."
+echo
+virtualenv . >> install.log
+cat >> bin/activate <<EOF
+
+\# This last bit was added by the LSDA installer script, just for you!
+ssh-add .lsda_ssh_key.pem
+EOF
+
+source bin/activate
+pip install -r requirements.txt >> install.log
+git checkout -b "submissions/$CNETID/submit" >> install.log
+
+echo
 echo
 echo "Excellent. It appears everything is in order. If you are having"
 echo "problems, please find Jeremy and bother him until he makes everything"
