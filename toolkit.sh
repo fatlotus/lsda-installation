@@ -106,7 +106,7 @@ EOF
 
 source bin/activate
 pip install -r requirements.txt >> install.log
-git checkout -b "submissions/$CNETID/submit" >> install.log
+git checkout -b "submissions/$CNETID/submit" 2>> install.log
 
 echo
 echo
