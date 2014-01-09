@@ -51,6 +51,12 @@ fi
 
 sleep 2
 
+echo
+echo "Next let's install Virtualenv. This is a software package that makes"
+echo "Installation of future software packages easier."
+echo
+
+rm -rf virtualenv
 git clone --depth 1 https://github.com/pypa/virtualenv 2>>install.log \
   >> install.log
 
@@ -61,9 +67,9 @@ echo "Now we will set up"
 echo
 echo "  `pwd`"
 echo
-echo "as the working directory for this class. When working on code, be sure to return"
-echo "to this directory before making changes. Next we're going to set up your"
-echo "computer to use your CNetID account for submitting assignments."
+echo "as the working directory for this class. When working on code, be sure"
+echo "to return to this directory before making changes. Next we're going"
+echo "to set up your computer to use your CNetID for submitting assignments."
 echo
 
 sleep 2
