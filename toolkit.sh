@@ -51,7 +51,7 @@ fi
 
 sleep 2
 
-git clone https://github.com/pypa/virtualenv
+git clone --depth 1 https://github.com/pypa/virtualenv >> install.log
 
 sleep 2
 
@@ -61,8 +61,8 @@ echo
 echo "  `pwd`"
 echo
 echo "as the working directory for this class. When working on code, be sure to return"
-echo "to this directory before making changes. Next we're going to set up your computer"
-echo "to use your CNetID account for submitting assignments."
+echo "to this directory before making changes. Next we're going to set up your"
+echo "computer to use your CNetID account for submitting assignments."
 echo
 
 sleep 2
@@ -73,7 +73,7 @@ CNETID="$(head -n 1 /dev/tty)"
 if [ ! -f .lsda_ssh_key.pem ]; then
   curl --insecure -k -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > .lsda_ssh_key.pem
   chmod 0400 .lsda_ssh_key.pem
-  ssh-add .lsda_ssh_key.pem
+  ssh-add .lsda_ssh_key.pem >> install.log
 fi
 
 if [ ! -d .git ]; then
@@ -90,7 +90,12 @@ fi
 echo
 echo "Hang tight -- this may take a few minutes."
 echo
-python virtualenv/virtualenv.py . >> install.log
+
+python virtualenv/virtualenv.py bootstrap >> install.log
+bootstrap/bin/pip install virtualenv >> install.log
+bootstrap/bin/virtualenv . >> install.log
+rm -r bootstrap
+
 cat >> bin/activate <<EOF
 
 \# This last bit was added by the LSDA installer script, just for you!
