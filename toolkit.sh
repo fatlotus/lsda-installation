@@ -21,15 +21,14 @@ sleep 2
 
 if ! which git > /dev/null; then
   echo
-  echo "I'm unable to find Git, a source code management package. Let's"
-  echo "install it now:"
+  echo "I'm unable to find Git, a source code management package. Please do"
+  echo "that before continuing. Unfortunately the actual steps required to do"
+  echo "this vary by platform, but the following should get you started:"
+  echo
+  echo "  http://git-scm.com/book/en/Getting-Started-Installing-Git"
   echo
   
-  sudo aptitude install git-core
-  
-  echo
-  echo "It appears that went well. Let's continue."
-  echo
+  exit 1
 else
   echo "It appears that you already have Git!"
 fi
@@ -37,14 +36,18 @@ fi
 sleep 2
 
 if ( ! which python > /dev/null ); then
-  echo "I'm unable to find Python- let's install that now:"
+  echo "I'm unable to find Python. There are several reasons why this might"
+  echo "occur, even if you do have it installed. Please verify that you can run"
+  echo "\"python\" (without quotes) and then re-run this script."
+  echo
+  echo "If you're not sure where to begin, try the following platform-specific"
+  echo "tutorial. If possible, try to install Python 2.7, since that's likely"
+  echo "what your classmates are using -- but either will work in this course."
+  echo
+  echo "  https://wiki.python.org/moin/BeginnersGuide/Download"
   echo
   
-  sudo aptitude install python python-distribute python-virtualenv
-  
-  echo
-  echo "Let's continue."
-  echo
+  exit 1
 else
   echo "It appears you already have Python."
 fi
@@ -112,6 +115,8 @@ EOF
 source bin/activate
 pip install -r requirements.txt >> install.log
 git checkout -B "submissions/$CNETID/submit" 2>> install.log
+git config --local user.name $CNETID
+git config --local user.email $CNETID@uchicago.edu
 
 echo "Excellent. It appears everything is in order. If you are having"
 echo "problems, please find Jeremy and bother him until he makes everything"
