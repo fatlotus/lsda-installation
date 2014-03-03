@@ -82,7 +82,8 @@ CNETID="$(head -n 1 /dev/tty)"
 if [ ! -f .lsda_ssh_key.pem ]; then
   curl --insecure -k -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > .lsda_ssh_key.pem
   chmod 0400 .lsda_ssh_key.pem
-  ssh-add .lsda_ssh_key.pem >> install.log
+  mv .lsda_ssh_key.pem ~/.ssh/lsda_ssh_key.pem
+  echo "IdentityFile: ~/.ssh/lsda_ssh_key.pem" >> ~/.ssh/config
 fi
 
 if [ ! -d .git ]; then
