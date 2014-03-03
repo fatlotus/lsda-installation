@@ -107,13 +107,7 @@ bootstrap/bin/pip install virtualenv >> install.log
 bootstrap/bin/virtualenv . >> install.log
 rm -rf bootstrap virtualenv
 
-cat >> bin/activate <<EOF
-
-# This last bit was added by the LSDA installer script, just for you!
-ssh-add .lsda_ssh_key.pem >install.log 2>install.log
-EOF
-
-source bin/activate
+. bin/activate
 pip install -r requirements.txt >> install.log
 git checkout -B "submissions/$CNETID/submit" 2>> install.log
 git config --local user.name $CNETID
