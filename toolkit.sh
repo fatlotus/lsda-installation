@@ -96,7 +96,7 @@ if [ ! -f .lsda_ssh_key.pem ]; then
   chmod 0400 .lsda_ssh_key.pem
 
   echo "#!/bin/bash" > .ssh.sh
-  echo "ssh -i .lsda_ssh_key.pem $@" >> .ssh.sh
+  echo "ssh -i .lsda_ssh_key.pem \$@" >> .ssh.sh
   chmod +x .ssh.sh
 fi
 
