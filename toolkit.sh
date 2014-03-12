@@ -133,9 +133,9 @@ echo -ne "Installing FFTW3...\r"
 curl -sO "http://www.fftw.org/fftw-3.3.3.tar.gz"
 tar xf fftw-3.3.3.tar.gz
 cd fftw-3.3.3
-./configure --prefix="$(pwd)/.."
-make
-make install
+./configure --prefix="$(pwd)/.." >> install.log
+make >> install.log
+make install >> install.log
 cd ..
 
 echo -ne "Installing ZMQ...\r"
