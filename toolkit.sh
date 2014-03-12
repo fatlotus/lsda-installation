@@ -128,6 +128,15 @@ echo "ssh-add .lsda_ssh_key.pem" >> bin/activate
 
 . bin/activate
 
+echo -ne "Installing FFTW3...\r"
+curl --no-progress "http://www.fftw.org/fftw-3.3.3.tar.gz" >> fftw-3.3.3.tar.gz
+tar xf fftw-3.3.3.tar.gz
+cd fftw-3.3.3
+./configure --prefix="$(pwd)/.."
+make
+make install
+cd ..
+
 echo -ne "Installing ZMQ...\r"
 pip install --global-option="fetch_libzmq" pyzmq >> install.log
 
