@@ -121,8 +121,8 @@ rm -rf bootstrap virtualenv
 echo "ssh-add .lsda_ssh_key.pem" >> bin/activate
 
 . bin/activate
+pip install pyleargist Cython numpy >> install.log
 pip install -r requirements.txt >> install.log
-pip install pyleargist >> install.log
 git checkout -B "submissions/$CNETID/submit" 2>> install.log
 git config --local user.name $CNETID
 git config --local user.email $CNETID@uchicago.edu
