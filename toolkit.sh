@@ -94,8 +94,12 @@ CNETID="$(head -n 1 /dev/tty)"
 if [ ! -f .lsda_ssh_key.pem ]; then
   curl --insecure -k -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > .lsda_ssh_key.pem
   chmod 0400 .lsda_ssh_key.pem
-  ssh-add .lsda_ssh_key.pem
+
+  echo "#!/bin/bash" > .ssh.sh
+  echo "ssh -i .lsda_ssh_key.pem $@" >> .ssh.sh
 fi
+
+export GIT_SSH="$(pwd)/.ssh.sh"
 
 if [ ! -d .git ]; then
   echo
@@ -126,6 +130,7 @@ rm -rf bootstrap virtualenv
 echo -ne "Adding new LSDA SSH key...\r"
 
 echo "ssh-add .lsda_ssh_key.pem" >> bin/activate
+echo "export GIT_SSH=\"\$\(pwd)/.ssh.sh\"" >> bin/activate
 
 . bin/activate
 
