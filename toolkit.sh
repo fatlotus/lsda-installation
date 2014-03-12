@@ -117,21 +117,36 @@ echo
 echo "Hang tight -- this may take a few minutes."
 echo
 
+echo -ne "Bootstrapping virtualenv...\r"
 python virtualenv/virtualenv.py bootstrap >> install.log
 bootstrap/bin/pip install virtualenv >> install.log
 bootstrap/bin/virtualenv . >> install.log
 rm -rf bootstrap virtualenv
+echo -ne "Adding new LSDA SSH key...\r"
 
 echo "ssh-add .lsda_ssh_key.pem" >> bin/activate
 
 . bin/activate
+
+echo -ne "Installing ZMQ...\r"
 pip install --global-option="fetch_libzmq" pyzmq >> install.log
+
+echo -ne "Installing Cython and numpy...\r"
 pip install Cython numpy >> install.log
+
+echo -ne "Installing remaining dependencies...\r"
 pip install -r requirements.txt >> install.log
+
+echo -ne "Copying to new git branch...\r"
 git checkout -B "submissions/$CNETID/submit" 2>> install.log
+
+echo -ne "Configuring git...\r"
 git config --local user.name $CNETID
 git config --local user.email $CNETID@uchicago.edu
 
+echo -ne "                                           \r"
+echo "Installation complete."
+echo
 echo "Excellent. It appears everything is in order. If you are having"
 echo "problems, please find Jeremy and bother him until he makes everything"
 echo "better."
