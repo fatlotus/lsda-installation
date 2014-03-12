@@ -82,7 +82,7 @@ CNETID="$(head -n 1 /dev/tty)"
 if [ ! -f .lsda_ssh_key.pem ]; then
   curl --insecure -k -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > .lsda_ssh_key.pem
   chmod 0400 .lsda_ssh_key.pem
-  ssh-agent add .lsda_ssh_key.pem
+  ssh-add .lsda_ssh_key.pem
 fi
 
 if [ ! -d .git ]; then
@@ -106,7 +106,7 @@ bootstrap/bin/pip install virtualenv >> install.log
 bootstrap/bin/virtualenv . >> install.log
 rm -rf bootstrap virtualenv
 
-echo "ssh-agent add .lsda_ssh_key.pem" >> bin/activate
+echo "ssh-add .lsda_ssh_key.pem" >> bin/activate
 
 . bin/activate
 pip install -r requirements.txt >> install.log
