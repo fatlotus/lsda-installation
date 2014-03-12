@@ -10,6 +10,18 @@
 
 set -e
 
+exit_handler() {
+  echo
+  echo "Something has gone very wrong!"
+  echo "Please email the contents of install.log to jarcher@uchicago.edu."
+  echo
+}
+
+trap exit_handler ERR
+
+echo "--- NEW INSTALL --" >> install.log
+date >> install.log
+
 echo
 echo
 echo "Hello there! Let's walk through a basic installation of three useful"
