@@ -105,6 +105,7 @@ if [ ! -d .git ]; then
 
   # Fixme: this is very insecure.
   ssh-keygen -R lsda.cs.uchicago.edu || true
+  ssh-keygen -R 54.197.243.75 || true
   echo "lsda.cs.uchicago.edu ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCo6i5Y70XoHziSDs0cfJyR+h+HJmjJ8ojtKymKnm66XOt8kniAkmdyxlTuFcZbhGNZjRbeOICf+aMhV+fkDUyCi/f/AF4adRHaTIgqXs2UGdq88T9arFYTXMT3RYyVt7ccA1LPsH0pSvwDeRJAJMacpdwFB/l7Kz6UAENYcIlCmWPoo4Md0W71da9PsT+QDAN9Qeww/ndOwQo7c4AsPJS2ySEgtz/7ratxeKc7es7MXqxR3X3a/SVRKnfyYMrMcT5LyujzoUpOr9blmDoX1To/0KOGHZ3F6LD53ScT4lHbUWT238xLV9KeO8PPJ1zlVRZQoo7R5u6fF3L0lZloVqVb" >> ~/.ssh/known_hosts
   
   git clone git@lsda.cs.uchicago.edu:assignment-one .clone-dest.tmp \
