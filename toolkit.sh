@@ -121,6 +121,7 @@ rm -rf bootstrap virtualenv
 echo "ssh-add .lsda_ssh_key.pem" >> bin/activate
 
 . bin/activate
+pip install --global-option="fetch_libzmq" pyzmq >> install.log
 pip install Cython numpy >> install.log
 pip install -r requirements.txt >> install.log
 git checkout -B "submissions/$CNETID/submit" 2>> install.log
