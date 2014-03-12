@@ -97,6 +97,7 @@ if [ ! -f .lsda_ssh_key.pem ]; then
 
   echo "#!/bin/bash" > .ssh.sh
   echo "ssh -i .lsda_ssh_key.pem $@" >> .ssh.sh
+  chmod +x .ssh.sh
 fi
 
 export GIT_SSH="$(pwd)/.ssh.sh"
