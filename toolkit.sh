@@ -126,6 +126,7 @@ echo "Hang tight -- this may take a few minutes."
 echo
 
 echo -ne "Bootstrapping virtualenv...\r"
+rm -rf bin/activate # silence warnings
 python virtualenv/virtualenv.py bootstrap >> install.log
 bootstrap/bin/pip install virtualenv >> install.log
 bootstrap/bin/virtualenv . >> install.log
