@@ -133,7 +133,7 @@ rm -rf bootstrap virtualenv
 echo -ne "Adding new LSDA SSH key...\r"
 
 echo "eval \$(ssh-agent) >>/dev/null" >> bin/activate
-echo "ssh-add .lsda_ssh_key.pem" >> bin/activate
+echo "ssh-add .lsda_ssh_key.pem 2>&1 | grep -v \"Identity added\"" >> bin/activate
 echo "export GIT_SSH=\"\$\(pwd)/.ssh.sh\"" >> bin/activate
 
 . bin/activate
