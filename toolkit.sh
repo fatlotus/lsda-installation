@@ -23,6 +23,7 @@ trap exit_handler ERR
 echo "--- NEW INSTALL --" >> install.log
 date >> install.log
 
+set +x
 echo
 echo
 echo "Hello there! Let's walk through a basic installation of three useful"
@@ -41,16 +42,15 @@ if ! which git > /dev/null; then
   echo
   echo "  http://git-scm.com/book/en/Getting-Started-Installing-Git"
   echo
-  set -x
   
   exit 1
 else
   set +x
   echo "It appears that you already have Git!"
-  set -x
 fi
 
 sleep 2
+set -x
 
 if ( ! which python > /dev/null ); then
   set +x
@@ -77,6 +77,7 @@ sleep 2
 echo
 echo "Next, let's install Virtualenv. This is a software package that makes"
 echo "Installation of future software packages easier."
+echo
 
 set -x
 
@@ -137,11 +138,13 @@ if [ ! -d .git ]; then
 fi
 
 set +x
-echo "#"
-echo "# Hang tight -- this may take a few minutes."
-echo "#"
+echo
+echo "Hang tight -- this may take a few minutes."
+echo
 
-echo "# Bootstrapping virtualenv..."
+echo
+echo "Bootstrapping virtualenv..."
+echo
 set -x
 
 rm -rf bin/activate # silence warnings
@@ -151,7 +154,9 @@ bootstrap/bin/virtualenv . >> install.log || virtualenv . >> install.log
 rm -rf bootstrap virtualenv
 
 set +x
-echo "# Adding new LSDA SSH key..."
+echo
+echo "Adding new LSDA SSH key..."
+echo
 set -x
 
 echo "eval \$(ssh-agent)" >> bin/activate
@@ -161,7 +166,9 @@ echo "export GIT_SSH=\"\$(pwd)/.ssh.sh\"" >> bin/activate
 . bin/activate
 
 set +x
-echo "# Installing FFTW3..."
+echo
+echo "Installing FFTW3..."
+echo
 set -x
 
 curl -sO "http://www.fftw.org/fftw-3.3.3.tar.gz"
@@ -173,36 +180,47 @@ make install >> install.log
 cd ..
 
 set +x
-echo "# Installing ZMQ..."
+echo
+echo "Installing ZMQ..."
+echo
 set -x
 
 pip install --global-option="fetch_libzmq" pyzmq >> install.log
 
 set +x
-echo "# Installing Cython and numpy..."
+echo
+echo "Installing Cython and numpy..."
+echo
 set -x
 
 pip install Cython numpy >> install.log
 
 set +x
-echo "# Installing remaining dependencies..."
+echo
+echo "Installing remaining dependencies..."
+echo
 set -x
 
 pip install -r requirements.txt >> install.log
 
 set +x
-echo "# Copying to new git branch..."
+echo
+echo "Copying to new git branch..."
+echo
 set -x
 
 git checkout -B "submissions/$CNETID/submit" 2>> install.log
 
 set +x
-echo "# Configuring git..."
+echo
+echo "Configuring git..."
+echo
 set -x
 git config --local user.name $CNETID
 git config --local user.email $CNETID@uchicago.edu
 
 set +x
+echo
 echo "Installation complete."
 echo
 echo "Excellent. It appears everything is in order. If you are having"
