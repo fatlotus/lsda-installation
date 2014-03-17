@@ -179,7 +179,7 @@ echo "Installing Cython and numpy..."
 echo
 set -x
 
-pip install Cython numpy >> install.log
+pip install Cython numpy scipy >> install.log
 
 set +x
 echo
