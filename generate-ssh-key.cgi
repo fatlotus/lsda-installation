@@ -10,7 +10,7 @@ set -e -x
 TEMP_DIR=$(mktemp -d)
 cd $TEMP_DIR
 
-NONCE=$(date %s.%N)
+NONCE=$(date +%s.%N)
 
 # Pre-verify host checking (this is a hack!)
 ssh -o StrictHostKeyChecking=no git@localhost echo 1>&2 || true
