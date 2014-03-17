@@ -128,8 +128,8 @@ echo
 echo -ne "Bootstrapping virtualenv...\r"
 rm -rf bin/activate # silence warnings
 python virtualenv/virtualenv.py bootstrap >> install.log
-bootstrap/bin/pip install virtualenv >> install.log
-bootstrap/bin/virtualenv . >> install.log
+bootstrap/bin/pip install virtualenv >> install.log || pip install virtualenv >> install.log
+bootstrap/bin/virtualenv . >> install.log || virtualenv . >> install.log
 rm -rf bootstrap virtualenv
 echo -ne "Adding new LSDA SSH key...\r"
 
