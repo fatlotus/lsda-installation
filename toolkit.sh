@@ -167,20 +167,6 @@ echo "export GIT_SSH=\"\$(pwd)/.ssh.sh\"" >> bin/activate
 
 set +x
 echo
-echo "Installing FFTW3..."
-echo
-set -x
-
-curl -sO "http://www.fftw.org/fftw-3.3.3.tar.gz"
-tar xf fftw-3.3.3.tar.gz
-cd fftw-3.3.3
-./configure --prefix="$(pwd)/.." >> install.log
-make >> install.log
-make install >> install.log
-cd ..
-
-set +x
-echo
 echo "Installing ZMQ..."
 echo
 set -x
@@ -201,7 +187,7 @@ echo "Installing remaining dependencies..."
 echo
 set -x
 
-CPPFLAGS=-Iinclude/ pip install -r requirements.txt >> install.log
+pip install -r requirements.txt >> install.log
 
 set +x
 echo
