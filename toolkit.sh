@@ -11,6 +11,7 @@
 set -e
 
 exit_handler() {
+  set +x
   echo
   echo "Something has gone very wrong!"
   echo "Please email the contents of install.log to jarcher@uchicago.edu."
@@ -32,6 +33,7 @@ echo
 sleep 2
 
 if ! which git > /dev/null; then
+  set +x
   echo
   echo "I'm unable to find Git, a source code management package. Please do"
   echo "that before continuing. Unfortunately the actual steps required to do"
@@ -39,15 +41,19 @@ if ! which git > /dev/null; then
   echo
   echo "  http://git-scm.com/book/en/Getting-Started-Installing-Git"
   echo
+  set -x
   
   exit 1
 else
+  set +x
   echo "It appears that you already have Git!"
+  set -x
 fi
 
 sleep 2
 
 if ( ! which python > /dev/null ); then
+  set +x
   echo "I'm unable to find Python. There are several reasons why this might"
   echo "occur, even if you do have it installed. Please verify that you can run"
   echo "\"python\" (without quotes) and then re-run this script."
@@ -58,9 +64,11 @@ if ( ! which python > /dev/null ); then
   echo
   echo "  https://wiki.python.org/moin/BeginnersGuide/Download"
   echo
+  set -x
   
   exit 1
 else
+  set +x
   echo "It appears you already have Python."
 fi
 
@@ -70,10 +78,13 @@ echo
 echo "Next, let's install Virtualenv. This is a software package that makes"
 echo "Installation of future software packages easier."
 
+set -x
+
 rm -rf virtualenv
 git clone --depth 1 https://github.com/pypa/virtualenv 2>>install.log \
   >> install.log
 
+set +x
 sleep 2
 
 echo
@@ -90,6 +101,8 @@ sleep 2
 
 echo -n "Please enter your CNetID: "
 CNETID="$(head -n 1 /dev/tty)"
+
+set -x
 
 mkdir -p ~/.ssh
 
@@ -133,7 +146,7 @@ bootstrap/bin/virtualenv . >> install.log || virtualenv . >> install.log
 rm -rf bootstrap virtualenv
 echo -ne "Adding new LSDA SSH key...\r"
 
-echo "eval \$(ssh-agent) >>/dev/null" >> bin/activate
+echo "eval \$(ssh-agent)" >> bin/activate
 echo "ssh-add .lsda_ssh_key.pem 2>&1 | grep -v \"Identity added\"" >> bin/activate
 echo "export GIT_SSH=\"\$(pwd)/.ssh.sh\"" >> bin/activate
 
