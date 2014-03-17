@@ -201,7 +201,7 @@ echo "Installing remaining dependencies..."
 echo
 set -x
 
-pip install -r requirements.txt >> install.log
+CPPFLAGS=-Iinclude/ pip install -r requirements.txt >> install.log
 
 set +x
 echo
