@@ -10,6 +10,8 @@ set -e -x
 TEMP_DIR=$(mktemp -d)
 cd $TEMP_DIR
 
+NONCE=$(date %s.%N)
+
 # Pre-verify host checking (this is a hack!)
 ssh -o StrictHostKeyChecking=no git@localhost echo 1>&2 || true
 
@@ -17,10 +19,10 @@ ssh -o StrictHostKeyChecking=no git@localhost echo 1>&2 || true
 git clone git@localhost:gitolite-admin $TEMP_DIR 1>&2
 
 # Generate a new certificate
-ssh-keygen -b 4096 -t rsa -f keydir/$REMOTE_USER -P "" 1>&2
+ssh-keygen -b 4096 -t rsa -f keydir/$NONCE/$REMOTE_USER -P "" 1>&2
 
 # Add the new certificate to gitolite
-git add keydir/$REMOTE_USER.pub conf/gitolite.conf
+git add keydir/$NONCE/$REMOTE_USER.pub conf/gitolite.conf
 
 # Generate the automated commit
 git commit --author "Cylon Jeremy <open-source@fatlotus.com>" \
@@ -29,7 +31,7 @@ git commit --author "Cylon Jeremy <open-source@fatlotus.com>" \
 # A huge race condition!
 git push origin master 1>&2
 
-cat keydir/$REMOTE_USER
+cat keydir/$NONCE/$REMOTE_USER
 
 cd /
 rm -rf $TEMP_DIR
