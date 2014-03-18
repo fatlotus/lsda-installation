@@ -19,10 +19,10 @@ ssh -o StrictHostKeyChecking=no git@localhost echo 1>&2 || true
 git clone git@localhost:gitolite-admin $TEMP_DIR 1>&2
 
 # Generate a new certificate
+mkdir keydir/$NONCE
 ssh-keygen -b 4096 -t rsa -f keydir/$NONCE/$REMOTE_USER -P "" 1>&2
 
 # Add the new certificate to gitolite
-mkdir keydir/$NONCE
 git add keydir/$NONCE/$REMOTE_USER.pub conf/gitolite.conf
 
 # Generate the automated commit
