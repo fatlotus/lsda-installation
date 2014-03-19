@@ -108,7 +108,7 @@ set -x
 mkdir -p ~/.ssh
 
 if [ ! -f .lsda_ssh_key.pem ]; then
-  curl --insecure -k -s -u $CNETID https://lsda.cs.uchicago.edu/generate-ssh-key.cgi > .lsda_ssh_key.pem
+  curl --insecure -k -s -u $CNETID https://lsda.cs.uchicago.edu/cgi-bin/generate-ssh-key.cgi > .lsda_ssh_key.pem
   chmod 0400 .lsda_ssh_key.pem
 
   echo "#!/bin/bash" > .ssh.sh
@@ -117,6 +117,10 @@ if [ ! -f .lsda_ssh_key.pem ]; then
 fi
 
 export GIT_SSH="$(pwd)/.ssh.sh"
+
+if [ ! -f main.ipynb ]; then
+  rm -rf .git
+fi
 
 if [ ! -d .git ]; then
   set +x
