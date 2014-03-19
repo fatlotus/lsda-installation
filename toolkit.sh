@@ -100,11 +100,12 @@ echo
 
 sleep 2
 
-if [ "x$1" == "x" ]; then
+if [ "x$TEST_CNETID" == "x" ]; then
   echo -n "Please enter your CNetID: "
   CNETID="$(head -n 1 /dev/tty)"
 else
-  CNETID="$1"
+  CNETID="$TEST_CNETID"
+  touch .lsda_ssh_key.pem
 fi
 
 set -x
@@ -114,11 +115,11 @@ mkdir -p ~/.ssh
 if [ ! -f .lsda_ssh_key.pem ]; then
   curl -s -u $CNETID https://lsda.cs.uchicago.edu/cgi-bin/generate-ssh-key.cgi > .lsda_ssh_key.pem
   chmod 0400 .lsda_ssh_key.pem
-
-  echo "#!/bin/bash" > .ssh.sh
-  echo "ssh -i .lsda_ssh_key.pem \$@" >> .ssh.sh
-  chmod +x .ssh.sh
 fi
+
+echo "#!/bin/bash" > .ssh.sh
+echo "ssh -i .lsda_ssh_key.pem \$@" >> .ssh.sh
+chmod +x .ssh.sh
 
 export GIT_SSH="$(pwd)/.ssh.sh"
 
