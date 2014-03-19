@@ -100,8 +100,12 @@ echo
 
 sleep 2
 
-echo -n "Please enter your CNetID: "
-CNETID="$(head -n 1 /dev/tty)"
+if [ "x$1" == "x" ]; then
+  echo -n "Please enter your CNetID: "
+  CNETID="$(head -n 1 /dev/tty)"
+else
+  CNETID="$1"
+fi
 
 set -x
 
