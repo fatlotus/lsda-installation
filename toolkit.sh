@@ -112,8 +112,10 @@ set -x
 
 mkdir -p ~/.ssh
 
-if ! grep "BEGIN RSA PRIVATE KEY" .ldsa_ssh_key.pem ; then
-  rm -rf .lsda_ssh_key.pem
+if [ -f .lsda_ssh_key.pem ]; then
+  if ! grep "BEGIN RSA PRIVATE KEY" .ldsa_ssh_key.pem ; then
+    rm -rf .lsda_ssh_key.pem
+  fi
 fi
 
 if [ ! -f .lsda_ssh_key.pem ]; then
