@@ -112,9 +112,17 @@ set -x
 
 mkdir -p ~/.ssh
 
+if ! grep "BEGIN RSA PRIVATE KEY" .ldsa_ssh_key.pem ; then
+  rm -rf .lsda_ssh_key.pem
+fi
+
 if [ ! -f .lsda_ssh_key.pem ]; then
-  curl -s -u $CNETID https://lsda.cs.uchicago.edu/cgi-bin/generate-ssh-key.cgi > .lsda_ssh_key.pem
+  curl --insecure -k -s -u $CNETID https://lsda.cs.uchicago.edu/cgi-bin/generate-ssh-key.cgi > .lsda_ssh_key.pem
   chmod 0400 .lsda_ssh_key.pem
+  
+  if ! grep "BEGIN RSA PRIVATE KEY" .ldsa_ssh_key.pem ; then
+    exit 1
+  fi
 fi
 
 echo "#!/bin/bash" > .ssh.sh
