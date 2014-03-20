@@ -159,7 +159,7 @@ set -x
 rm -rf bin/activate # silence warnings
 python virtualenv/virtualenv.py bootstrap >> install.log
 bootstrap/bin/pip install virtualenv >> install.log || pip install --user virtualenv >> install.log
-bootstrap/bin/virtualenv . >> install.log || virtualenv . >> install.log
+bootstrap/bin/virtualenv --system-site-packages . >> install.log || virtualenv . >> install.log
 rm -rf bootstrap virtualenv
 
 set +x
