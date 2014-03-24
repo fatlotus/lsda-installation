@@ -165,7 +165,7 @@ echo
 set -x
 
 rm -rf bin/activate # silence warnings
-virtualenv .
+yes | virtualenv --system-site-packages .
 
 set +x
 echo
