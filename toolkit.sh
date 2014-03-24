@@ -82,7 +82,7 @@ echo
 set -x
 
 rm -rf virtualenv
-git clone --depth 1 https://github.com/pypa/virtualenv 2>>install.log \
+git clone --depth 1 git://github.com/pypa/virtualenv 2>>install.log \
   >> install.log
 
 set +x
