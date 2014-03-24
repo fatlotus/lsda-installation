@@ -81,9 +81,7 @@ echo
 
 set -x
 
-rm -rf virtualenv
-git clone --depth 1 git://github.com/pypa/virtualenv 2>>install.log \
-  >> install.log
+pip install --user virtualenv >> install.log
 
 set +x
 sleep 2
@@ -162,15 +160,12 @@ echo "Hang tight -- this may take a few minutes."
 echo
 
 echo
-echo "Bootstrapping virtualenv..."
+echo "Setting up a virtual environment..."
 echo
 set -x
 
 rm -rf bin/activate # silence warnings
-python virtualenv/virtualenv.py bootstrap >> install.log
-bootstrap/bin/pip install virtualenv >> install.log || pip install --user virtualenv >> install.log
-bootstrap/bin/virtualenv --system-site-packages . >> install.log || virtualenv . >> install.log
-rm -rf bootstrap virtualenv
+virtualenv .
 
 set +x
 echo
