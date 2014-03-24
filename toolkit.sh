@@ -81,7 +81,11 @@ echo
 
 set -x
 
-pip install --user virtualenv >> install.log
+if which conda; then
+  conda create -p $(pwd) python=2.7 numpy=1.6 scipy=0.14 >> install.log
+else
+  pip install --user virtualenv >> install.log
+fi
 
 set +x
 sleep 2
@@ -164,8 +168,10 @@ echo "Setting up a virtual environment..."
 echo
 set -x
 
-rm -rf bin/activate # silence warnings
-yes | virtualenv --system-site-packages .
+if ! which conda; then
+  rm -rf bin/activate # silence warnings
+  virtualenv --system-site-packages .
+fi
 
 set +x
 echo
