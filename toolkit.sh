@@ -184,6 +184,9 @@ echo "eval \$(ssh-agent)" >> bin/activate
 echo "ssh-add .lsda_ssh_key.pem 2>&1 | grep -v \"Identity added\" || true" >> bin/activate
 echo "export GIT_SSH=\"\$(pwd)/.ssh.sh\"" >> bin/activate
 
+echo "#!/bin/bash" >> bin/notebook
+echo "BROWSER=echo ipython notebook main.ipynb --no-browser --port-retries=0 --port=\$PORT --matplotlib=inline"
+
 . bin/activate
 
 set +x
