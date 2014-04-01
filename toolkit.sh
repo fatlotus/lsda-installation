@@ -180,7 +180,7 @@ echo
 set -x
 
 echo "git checkout submissions/$CNETID/submit" >> bin/activate
-echo "eval \$(ssh-agent)" >> bin/activate
+echo "eval \$(ssh-agent | grep -v ^echo)" >> bin/activate
 echo "ssh-add .lsda_ssh_key.pem 2>&1 | grep -v \"Identity added\" || true" >> bin/activate
 echo "export GIT_SSH=\"\$(pwd)/.ssh.sh\"" >> bin/activate
 
@@ -188,6 +188,7 @@ echo "#!/bin/bash" >> bin/notebook
 echo "BROWSER=echo ipython notebook main.ipynb --no-browser --port-retries=0 --port=\$PORT --matplotlib=inline"
 
 echo "#!$SHELL" >> bin/run_environment
+echo "cd \$(dirname \$0); cd .." >> bin/run_environment
 echo "source bin/activate" >> bin/run_environment
 
 . bin/activate
