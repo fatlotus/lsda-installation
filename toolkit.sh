@@ -187,6 +187,9 @@ echo "export GIT_SSH=\"\$(pwd)/.ssh.sh\"" >> bin/activate
 echo "#!/bin/bash" >> bin/notebook
 echo "BROWSER=echo ipython notebook main.ipynb --no-browser --port-retries=0 --port=\$PORT --matplotlib=inline"
 
+echo "#!$SHELL" >> bin/run_environment
+echo "source bin/activate" >> bin/run_environment
+
 . bin/activate
 
 set +x
