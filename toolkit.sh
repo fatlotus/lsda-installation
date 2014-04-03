@@ -188,7 +188,7 @@ echo "#!/bin/bash" > bin/notebook
 echo "if [ \"x\$ADDRESS\" = x ]; then" >> bin/notebook
 echo "  ADDRESS=127.0.0.1" >> bin/notebook
 echo "fi" >> bin/notebook
-echo "BROWSER=echo ipython notebook main.ipynb --no-browser --port-retries=0 --port=\$PORT --address=\$ADDRESS--matplotlib=inline" >> bin/notebook
+echo "BROWSER=echo ipython notebook main.ipynb --no-browser --port-retries=0 --port=\$PORT --ip=\$ADDRESS --matplotlib=inline" >> bin/notebook
 
 chmod +x bin/notebook
 
