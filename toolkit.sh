@@ -160,7 +160,7 @@ fi
 
 set +x
 echo
-echo "Hang tight -- this may take a few minutes."
+echo "Hang tight -- this may take ten or fifteen minutes."
 echo
 
 echo
