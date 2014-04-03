@@ -179,7 +179,7 @@ echo "Adding new LSDA SSH key..."
 echo
 set -x
 
-echo git checkout submissions/$CNETID/submit \|\| git checkout -B submissions/$CNETID/submit > bin/activate
+echo git checkout submissions/$CNETID/submit \|\| git checkout -B submissions/$CNETID/submit >> bin/activate
 echo "eval \$(ssh-agent | grep -v ^echo)" >> bin/activate
 echo "ssh-add .lsda_ssh_key.pem 2>&1 | grep -v \"Identity added\" || true" >> bin/activate
 echo "export GIT_SSH=\"\$(pwd)/.ssh.sh\"" >> bin/activate
