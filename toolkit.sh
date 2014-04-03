@@ -185,6 +185,9 @@ echo "ssh-add .lsda_ssh_key.pem 2>&1 | grep -v \"Identity added\" || true" >> bi
 echo "export GIT_SSH=\"\$(pwd)/.ssh.sh\"" >> bin/activate
 
 echo "#!/bin/bash" > bin/notebook
+echo "if [ \"x$ADDRESS\" = x]; then" >> bin/notebook
+echo "  ADDRESS=127.0.0.1" >> bin/notebook
+echo "fi" >> bin/notebook
 echo "BROWSER=echo ipython notebook main.ipynb --no-browser --port-retries=0 --port=\$PORT --matplotlib=inline" >> bin/notebook
 
 chmod +x bin/notebook
