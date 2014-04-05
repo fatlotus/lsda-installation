@@ -14,14 +14,11 @@ exit_handler() {
   set +x
   echo
   echo "Something has gone very wrong!"
-  echo "Please email the contents of install.log to jarcher@uchicago.edu."
+  echo "Please post the last few hundred lines of output into a Piazza post :)."
   echo
 }
 
 trap exit_handler ERR
-
-echo "--- NEW INSTALL --" >> install.log
-date >> install.log
 
 set +x
 echo
@@ -81,11 +78,7 @@ echo
 
 set -x
 
-if which conda; then
-  conda create -p $(pwd) python=2.7 numpy=1.6 scipy=0.14 >> install.log
-else
-  pip install --user virtualenv >> install.log
-fi
+pip install --user virtualenv
 
 set +x
 sleep 2
@@ -152,10 +145,9 @@ if [ ! -d .git ]; then
   ssh-keygen -R 54.197.243.75 || true
   echo "lsda.cs.uchicago.edu ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCo6i5Y70XoHziSDs0cfJyR+h+HJmjJ8ojtKymKnm66XOt8kniAkmdyxlTuFcZbhGNZjRbeOICf+aMhV+fkDUyCi/f/AF4adRHaTIgqXs2UGdq88T9arFYTXMT3RYyVt7ccA1LPsH0pSvwDeRJAJMacpdwFB/l7Kz6UAENYcIlCmWPoo4Md0W71da9PsT+QDAN9Qeww/ndOwQo7c4AsPJS2ySEgtz/7ratxeKc7es7MXqxR3X3a/SVRKnfyYMrMcT5LyujzoUpOr9blmDoX1To/0KOGHZ3F6LD53ScT4lHbUWT238xLV9KeO8PPJ1zlVRZQoo7R5u6fF3L0lZloVqVb" >> ~/.ssh/known_hosts
   
-  git clone git@lsda.cs.uchicago.edu:assignment-one .clone-dest.tmp \
-    2>>install.log >> install.log
+  git clone git@lsda.cs.uchicago.edu:submissions/$CNETID/submit .clone-dest.tmp 
   mv .clone-dest.tmp/.git .git
-  git reset --hard HEAD 2>>install.log >>install.log
+  git reset --hard HEAD
 fi
 
 set +x
@@ -168,10 +160,8 @@ echo "Setting up a virtual environment..."
 echo
 set -x
 
-if ! which conda; then
-  rm -rf bin/activate # silence warnings
-  virtualenv --system-site-packages .
-fi
+rm -rf bin/activate # silence warnings
+virtualenv --system-site-packages .
 
 set +x
 echo
@@ -179,9 +169,6 @@ echo "Adding new LSDA SSH key..."
 echo
 set -x
 
-echo git checkout submissions/$CNETID/submit \|\| git checkout -B submissions/$CNETID/submit >> bin/activate
-echo "eval \$(ssh-agent | grep -v ^echo)" >> bin/activate
-echo "ssh-add .lsda_ssh_key.pem 2>&1 | grep -v \"Identity added\" || true" >> bin/activate
 echo "export GIT_SSH=\"\$(pwd)/.ssh.sh\"" >> bin/activate
 
 echo "#!/bin/bash" > bin/notebook
@@ -200,7 +187,7 @@ echo "Installing ZMQ..."
 echo
 set -x
 
-pip install --global-option="fetch_libzmq" pyzmq >> install.log
+pip install --global-option="fetch_libzmq" pyzmq
 
 set +x
 echo
@@ -208,7 +195,7 @@ echo "Installing Cython and numpy..."
 echo
 set -x
 
-pip install Cython numpy scipy >> install.log
+pip install Cython numpy scipy
 
 set +x
 echo
@@ -216,7 +203,7 @@ echo "Installing remaining dependencies..."
 echo
 set -x
 
-pip install -r requirements.txt >> install.log
+pip install -r requirements.txt
 
 set +x
 echo
