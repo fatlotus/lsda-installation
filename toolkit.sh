@@ -114,7 +114,7 @@ if [ -f .lsda_ssh_key.pem ]; then
 fi
 
 if [ ! -f .lsda_ssh_key.pem ]; then
-  curl --insecure -k -s -u $CNETID https://lsda.cs.uchicago.edu/cgi-bin/generate-ssh-key.cgi > .lsda_ssh_key.pem
+  curl --insecure -k -s -u $CNETID https://lsda.cs.uchicago.edu/cgi-bin/generate-ssh-key.php > .lsda_ssh_key.pem
   chmod 0400 .lsda_ssh_key.pem
   
   if ! grep "BEGIN RSA PRIVATE KEY" .lsda_ssh_key.pem ; then
